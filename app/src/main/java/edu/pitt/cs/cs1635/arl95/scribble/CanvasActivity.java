@@ -12,8 +12,10 @@ public class CanvasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_canvas);
 
+        DrawingManager dm = DrawingManager.getInstance();
+
         Intent intent = getIntent();
-        String message = intent.getStringExtra(MainActivity.CANVAS_DRAWING);
+        String message = intent.getStringExtra(dm.CANVAS_DRAWING);
 
         TextView text = (TextView) findViewById(R.id.canvas_text_view);
         text.setText(message);

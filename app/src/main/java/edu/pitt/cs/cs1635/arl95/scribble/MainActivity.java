@@ -15,8 +15,6 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    public final static String CANVAS_DRAWING = "canvas_drawing";
-
     private RecyclerView drawingList;
     private RecyclerView.Adapter drawingListAdapter;
 
@@ -26,11 +24,14 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        final DrawingManager dm = DrawingManager.getInstance();
+        dm.setMainActivity(this);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startDrawing("This is a new drawing");
+                dm.startDrawing("This is a new drawing");
             }
         });
 
@@ -79,11 +80,5 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    public void startDrawing(String message) {
-        Intent intent = new Intent(this, CanvasActivity.class);
-        intent.putExtra(CANVAS_DRAWING, message);
-        startActivity(intent);
     }
 }

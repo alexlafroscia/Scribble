@@ -1,6 +1,8 @@
 package edu.pitt.cs.cs1635.arl95.scribble;
 
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +49,17 @@ public class DrawingViewAdapter extends RecyclerView.Adapter<DrawingViewAdapter.
         public ViewHolder(View itemView) {
             super(itemView);
             textView = (TextView) itemView.findViewById(R.id.textView);
+
+            final DrawingManager dm = DrawingManager.getInstance();
+
+            CardView card = (CardView) itemView.findViewById(R.id.drawing_item);
+            card.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d("CardView", textView.getText().toString());
+                    dm.startDrawing(textView.getText().toString());
+                }
+            });
         }
     }
 }
