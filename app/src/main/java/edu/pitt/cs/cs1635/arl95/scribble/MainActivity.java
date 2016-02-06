@@ -1,9 +1,8 @@
 package edu.pitt.cs.cs1635.arl95.scribble;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,11 +10,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
-
 import java.util.ArrayList;
 
+
 public class MainActivity extends AppCompatActivity {
+
+    public final static String CANVAS_DRAWING = "canvas_drawing";
 
     private RecyclerView drawingList;
     private RecyclerView.Adapter drawingListAdapter;
@@ -30,8 +30,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                startDrawing("This is a new drawing");
             }
         });
 
@@ -80,5 +79,11 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void startDrawing(String message) {
+        Intent intent = new Intent(this, CanvasActivity.class);
+        intent.putExtra(CANVAS_DRAWING, message);
+        startActivity(intent);
     }
 }
