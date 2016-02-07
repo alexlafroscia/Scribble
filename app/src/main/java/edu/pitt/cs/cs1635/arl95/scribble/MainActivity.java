@@ -1,6 +1,5 @@
 package edu.pitt.cs.cs1635.arl95.scribble;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -10,7 +9,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -31,7 +29,8 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dm.startDrawing("This is a new drawing");
+                int index = dm.createDrawing();
+                dm.startDrawing(index);
             }
         });
 

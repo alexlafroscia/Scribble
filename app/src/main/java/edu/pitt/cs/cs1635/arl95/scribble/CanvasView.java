@@ -1,15 +1,10 @@
 package edu.pitt.cs.cs1635.arl95.scribble;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
-import android.text.TextPaint;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -20,7 +15,7 @@ import java.util.ArrayList;
  */
 public class CanvasView extends View {
 
-    private Drawing drawing;
+    private Drawing drawing = new Drawing();
     private Paint paint = new Paint();
 
     public CanvasView(Context context) {
@@ -41,9 +36,6 @@ public class CanvasView extends View {
     public void init() {
         paint.setColor(Color.BLACK);
 
-        drawing = new Drawing();
-        drawing.makeLine(paint.getColor());
-
         this.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -52,6 +44,12 @@ public class CanvasView extends View {
                 return true;
             }
         });
+    }
+
+    public void setDrawing(Drawing d) {
+        drawing = d;
+        drawing.makeLine(paint.getColor()); // Make a new line to start drawing on
+        invalidate();
     }
 
     @Override

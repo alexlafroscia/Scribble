@@ -15,9 +15,13 @@ public class CanvasActivity extends AppCompatActivity {
         DrawingManager dm = DrawingManager.getInstance();
 
         Intent intent = getIntent();
-        String message = intent.getStringExtra(dm.CANVAS_DRAWING);
+        int drawingIndex =  intent.getIntExtra(dm.CANVAS_DRAWING, 0);
+        Drawing drawing = dm.get(drawingIndex);
 
         TextView text = (TextView) findViewById(R.id.canvas_text_view);
-        text.setText(message);
+        text.setText(drawing.name);
+
+        CanvasView canvas = (CanvasView) findViewById(R.id.canvas_view);
+        canvas.setDrawing(drawing);
     }
 }

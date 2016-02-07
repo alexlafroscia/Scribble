@@ -2,7 +2,6 @@ package edu.pitt.cs.cs1635.arl95.scribble;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +29,12 @@ public class DrawingViewAdapter extends RecyclerView.Adapter<DrawingViewAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.textView.setText(dm.get(position));
+        Drawing d = dm.get(position);
+        holder.textView.setText(d.name);
+
+        // Attach a drawing to the holder, so that the holder can pass the drawing to the canvas
+        // when it is clicked on to launch that activity
+        holder.setIndex(position);
     }
 
     @Override
@@ -45,6 +49,7 @@ public class DrawingViewAdapter extends RecyclerView.Adapter<DrawingViewAdapter.
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
         protected TextView textView;
+        private int position;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -56,10 +61,13 @@ public class DrawingViewAdapter extends RecyclerView.Adapter<DrawingViewAdapter.
             card.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d("CardView", textView.getText().toString());
-                    dm.startDrawing(textView.getText().toString());
+                    dm.startDrawing(position);
                 }
             });
+        }
+
+        public void setIndex(int index) {
+            position = index;
         }
     }
 }

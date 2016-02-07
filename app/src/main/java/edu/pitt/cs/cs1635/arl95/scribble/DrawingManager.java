@@ -17,7 +17,7 @@ public class DrawingManager {
     private static DrawingManager ourInstance = new DrawingManager();
     private Activity mainActivity;
 
-    private ArrayList<String> data;
+    private ArrayList<Drawing> data;
 
     public static DrawingManager getInstance() {
         return ourInstance;
@@ -25,19 +25,10 @@ public class DrawingManager {
 
     private DrawingManager() {
         data = new ArrayList<>();
-        data.add("This is a test 1");
-        data.add("This is a test 2");
-        data.add("This is a test 3");
-        data.add("This is a test 4");
-        data.add("This is a test 5");
-        data.add("This is a test 6");
-        data.add("This is a test 7");
-        data.add("This is a test 8");
-        data.add("This is a test 9");
-        data.add("This is a test 10");
+        this.createDrawing();
     }
 
-    public String get(int index) {
+    public Drawing get(int index) {
         return data.get(index);
     }
 
@@ -45,17 +36,23 @@ public class DrawingManager {
         return data.size();
     }
 
-    public ArrayList<String> getData() {
-        return data;
+    /**
+     * Creates a new drawing and returns the index in the array
+     * @return {int} index
+     */
+    public int createDrawing() {
+        Drawing d = new Drawing();
+        data.add(d);
+        return data.indexOf(d);
     }
 
     public void setMainActivity(Activity main) {
         mainActivity = main;
     }
 
-    public void startDrawing(String message) {
+    public void startDrawing(int position) {
         Intent intent = new Intent(mainActivity, CanvasActivity.class);
-        intent.putExtra(CANVAS_DRAWING, message);
+        intent.putExtra(CANVAS_DRAWING, position);
         mainActivity.startActivity(intent);
     }
 }
