@@ -40,24 +40,7 @@ public class MainActivity extends AppCompatActivity {
         drawingList.setLayoutManager(new LinearLayoutManager(this));
         drawingList.setNestedScrollingEnabled(true);
 
-        ArrayList<String> testList = new ArrayList<>();
-        testList.add("This is a test 1");
-        testList.add("This is a test 2");
-        testList.add("This is a test 3");
-        testList.add("This is a test 4");
-        testList.add("This is a test 5");
-        testList.add("This is a test 6");
-        testList.add("This is a test 7");
-        testList.add("This is a test 8");
-        testList.add("This is a test 9");
-        testList.add("This is a test 10");
-        testList.add("This is a test 11");
-        testList.add("This is a test 12");
-        testList.add("This is a test 13");
-        testList.add("This is a test 14");
-        testList.add("This is a test 15");
-        testList.add("This is a test 16");
-        drawingListAdapter = new DrawingViewAdapter(testList);
+        drawingListAdapter = new DrawingViewAdapter(dm.getData());
         drawingList.setAdapter(drawingListAdapter);
     }
 
