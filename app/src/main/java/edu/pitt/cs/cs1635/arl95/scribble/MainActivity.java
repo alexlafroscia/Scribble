@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         drawingList.setLayoutManager(new LinearLayoutManager(this));
         drawingList.setNestedScrollingEnabled(true);
 
-        drawingListAdapter = new DrawingViewAdapter(dm.getData());
+        drawingListAdapter = new DrawingViewAdapter();
         drawingList.setAdapter(drawingListAdapter);
     }
 

@@ -15,10 +15,10 @@ import java.util.ArrayList;
  */
 public class DrawingViewAdapter extends RecyclerView.Adapter<DrawingViewAdapter.ViewHolder> {
 
-    private ArrayList<String> dataSet;
+    DrawingManager dm;
 
-    public DrawingViewAdapter(ArrayList<String> data) {
-        dataSet = data;
+    public DrawingViewAdapter() {
+        dm = DrawingManager.getInstance();
     }
 
     @Override
@@ -30,12 +30,12 @@ public class DrawingViewAdapter extends RecyclerView.Adapter<DrawingViewAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.textView.setText(dataSet.get(position));
+        holder.textView.setText(dm.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return dataSet.size();
+        return dm.size();
     }
 
     /**

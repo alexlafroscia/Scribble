@@ -37,6 +37,14 @@ public class DrawingManager {
         data.add("This is a test 10");
     }
 
+    public String get(int index) {
+        return data.get(index);
+    }
+
+    public int size() {
+        return data.size();
+    }
+
     public ArrayList<String> getData() {
         return data;
     }
