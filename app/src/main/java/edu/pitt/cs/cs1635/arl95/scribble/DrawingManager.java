@@ -8,7 +8,16 @@ import java.util.ArrayList;
 import static android.support.v4.app.ActivityCompat.startActivity;
 
 /**
- * Created by alex on 2/6/16.
+ * Drawing Manager
+ *
+ * Singleton for managing the list of classes
+ *
+ * Responsibilities include:
+ *
+ *  - Storing the list of drawings
+ *  - Serializing and deserializing it from storage
+ *  - Getting specific drawings from the list
+ *  - Opening the Canvas view to editing an existing drawings
  */
 public class DrawingManager {
 
@@ -25,7 +34,6 @@ public class DrawingManager {
 
     private DrawingManager() {
         data = new ArrayList<>();
-        this.createDrawing();
     }
 
     public Drawing get(int index) {

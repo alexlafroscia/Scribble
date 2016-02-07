@@ -9,6 +9,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import java.util.concurrent.RecursiveAction;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -46,6 +49,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         drawingListAdapter.notifyDataSetChanged();
+
+        // Show empty label if the view is empty
+        DrawingManager dm = DrawingManager.getInstance();
+        TextView emptyLabel = (TextView) findViewById(R.id.empty_view);
+        RecyclerView rv = (RecyclerView) findViewById(R.id.drawing_list);
+        if (dm.size() == 0) {
+            emptyLabel.setVisibility(View.VISIBLE);
+            rv.setVisibility(View.GONE);
+        } else {
+            emptyLabel.setVisibility(View.GONE);
+            rv.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
