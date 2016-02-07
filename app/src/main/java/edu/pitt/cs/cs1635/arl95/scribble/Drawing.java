@@ -12,9 +12,8 @@ public class Drawing {
 
     private ArrayList<Line> lines = new ArrayList<>();
 
-    public Drawing() {
-        // Initialize the first line
-        lines.add(new Line());
+    public void makeLine(int color) {
+        lines.add(new Line(color));
     }
 
     public void addDot(float touchX, float touchY) {
@@ -22,20 +21,27 @@ public class Drawing {
         line.addDot(touchX, touchY);
     }
 
-    public void draw(Canvas canvas, Paint paint) {
+    public void draw(Canvas canvas) {
         for (Line line: lines) {
-            line.draw(canvas, paint);
+            line.draw(canvas);
         }
     }
 
     private class Line {
         private ArrayList<Dot> dots = new ArrayList<>();
+        private Paint paint;
+
+        public Line(int color) {
+            paint = new Paint();
+            paint.setColor(color);
+            paint.setStrokeWidth(3);
+        }
 
         public void addDot(float touchX, float touchY) {
             dots.add(new Dot(touchX, touchY));
         }
 
-        public void draw(Canvas canvas, Paint paint) {
+        public void draw(Canvas canvas) {
             for (int i = 0; i < dots.size() - 1; i++) {
                 Dot currentDot = dots.get(i);
                 Dot nextDot = dots.get(i + 1);

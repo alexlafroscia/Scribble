@@ -40,9 +40,9 @@ public class CanvasView extends View {
 
     public void init() {
         paint.setColor(Color.BLACK);
-        paint.setStrokeWidth(3);
 
         drawing = new Drawing();
+        drawing.makeLine(paint.getColor());
 
         this.setOnTouchListener(new OnTouchListener() {
             @Override
@@ -57,6 +57,6 @@ public class CanvasView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        drawing.draw(canvas, paint);
+        drawing.draw(canvas);
     }
 }
