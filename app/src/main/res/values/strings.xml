@@ -2,4 +2,7 @@
     <string name="app_name">Scribble</string>
     <string name="action_purge">Delete Drawings</string>
     <string name="empty_drawing_list">Make a drawing!</string>
+    <string name="name_field_placeholder">Name your drawing!</string>
+    <string name="text_label_black">Black Ink</string>
+    <string name="text_label_red">Red Ink</string>
 </resources>

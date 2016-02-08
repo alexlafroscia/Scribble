@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class CanvasView extends View {
 
     private Drawing drawing = new Drawing();
-    private Paint paint = new Paint();
+    int color = Color.BLACK;
 
     public CanvasView(Context context) {
         super(context);
@@ -34,13 +34,18 @@ public class CanvasView extends View {
     }
 
     public void init() {
-        paint.setColor(Color.BLACK);
-
+        final DrawingManager dm = DrawingManager.getInstance();
         this.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                drawing.addDot(event.getX(), event.getY());
-                invalidate();
+                if ((event.getAction() & MotionEvent.ACTION_MASK) == MotionEvent.ACTION_UP) {
+                    drawing.makeLine(color);
+                    dm.save();
+                    invalidate();
+                } else {
+                    drawing.addDot(event.getX(), event.getY());
+                    invalidate();
+                }
                 return true;
             }
         });
@@ -48,7 +53,7 @@ public class CanvasView extends View {
 
     public void setDrawing(Drawing d) {
         drawing = d;
-        drawing.makeLine(paint.getColor()); // Make a new line to start drawing on
+        drawing.makeLine(color); // Make a new line to start drawing on
         invalidate();
     }
 
@@ -56,5 +61,10 @@ public class CanvasView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         drawing.draw(canvas);
+    }
+
+    public void setPaintColor(int newColor) {
+        color = newColor;
+        drawing.makeLine(color);
     }
 }
