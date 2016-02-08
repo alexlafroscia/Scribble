@@ -2,6 +2,7 @@ package edu.pitt.cs.cs1635.arl95.scribble;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,8 +11,6 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-
-import java.util.concurrent.RecursiveAction;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -27,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         final DrawingManager dm = DrawingManager.getInstance();
         dm.setMainActivity(this);
+        dm.restore();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -48,6 +48,10 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onResume() {
         super.onResume();
+        this.repaintList();
+    }
+
+    protected void repaintList() {
         drawingListAdapter.notifyDataSetChanged();
 
         // Show empty label if the view is empty
@@ -61,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
             emptyLabel.setVisibility(View.GONE);
             rv.setVisibility(View.VISIBLE);
         }
+
+        dm.save();
     }
 
     @Override
@@ -77,8 +83,12 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        // Option to clear drawings
+        if (id == R.id.action_purge) {
+            DrawingManager dm = DrawingManager.getInstance();
+            if (dm.purge()) {
+                this.repaintList();
+            }
             return true;
         }
         return super.onOptionsItemSelected(item);
